@@ -31,11 +31,11 @@ class _ForgetPasswordEmailState extends State<ForgetPasswordEmail> {
                 // mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  SizedBox(height: ScreenConfig.height * 0.025),
+                  SizedBox(height: ScreenConfig.height * 0.1),
                   SizedBox(
                     width: ScreenConfig.width * 0.8,
-                    height: ScreenConfig.height * 0.5,
-                    child: Image.asset("assets/images/customers.png"),
+                    //height: ScreenConfig.height * 0.5,
+                    child: Image.asset("assets/images/forgetpass1.png"),
                   ),
                   SizedBox(height: ScreenConfig.height * 0.02),
                   RichText(
@@ -59,11 +59,12 @@ class _ForgetPasswordEmailState extends State<ForgetPasswordEmail> {
                     ),
                   ),
                   Text(
-                    "Enter your email to receive a password \n reset",
+                    "Enter your email to receive a password \n reset Link",
                     style: TextStyle(
-                        color: const Color(0xFFB8B7B3),
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold),
+                      color: const Color(0xFFB8B7B3),
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                    ),
                     textAlign: TextAlign.center,
                   ),
                   Container(
@@ -95,7 +96,7 @@ class _ForgetPasswordEmailState extends State<ForgetPasswordEmail> {
                                   borderSide: BorderSide(color: Colors.grey))),
                         ),
                         SizedBox(
-                          height: ScreenConfig.height * 0.025,
+                          height: ScreenConfig.height * 0.189,
                         ),
                         ElevatedButton(
                           onPressed: () {
@@ -119,9 +120,6 @@ class _ForgetPasswordEmailState extends State<ForgetPasswordEmail> {
                               fontSize: 18,
                             ),
                           ),
-                        ),
-                        SizedBox(
-                          height: ScreenConfig.height * 0.025,
                         ),
                       ],
                     ),

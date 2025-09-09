@@ -212,7 +212,9 @@ class _CreateAccountState extends State<CreateAccount> {
                     height: ScreenConfig.height * 0.0125,
                   ),
                   TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
                       child: RichText(
                           text: TextSpan(
                               text: "Already Have Account?  ",

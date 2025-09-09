@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
       ScreenConfig.init(context);
 
       return MaterialApp(
-        theme: ThemeData(textTheme: GoogleFonts.poppinsTextTheme()),
+        theme: ThemeData(textTheme: GoogleFonts.interTextTheme()),
         debugShowCheckedModeBanner: false,
         home: CustomWidget(),
       );

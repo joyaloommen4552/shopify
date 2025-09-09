@@ -181,8 +181,10 @@ class _CustomWidgetState extends State<CustomWidget> {
                           ),
                           label: Text(
                             "Sign In With Google",
-                            style:
-                                TextStyle(fontSize: 16, color: Colors.black),
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold),
                           ),
                           style: ElevatedButton.styleFrom(
                               backgroundColor:

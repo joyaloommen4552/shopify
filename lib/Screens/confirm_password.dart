@@ -30,11 +30,21 @@ class _ConfirmPasswordState extends State<ConfirmPassword> {
                 // mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  SizedBox(height: ScreenConfig.height * 0.025),
                   SizedBox(
-                    width: ScreenConfig.width * 0.8,
-                    height: ScreenConfig.height * 0.5,
-                    child: Image.asset("assets/images/customers.png"),
+                    height: ScreenConfig.height * 0.143,
+                  ),
+                  SizedBox(
+                    width: ScreenConfig.width * 0.35,
+                    //height: ScreenConfig.height * 0.43,
+                    child: Image.asset("assets/images/forgetpass22.png"),
+                  ),
+                  Text(
+                    "Your Password must be atleast contain \n a special character and 8 digit long",
+                    style: TextStyle(
+                        color: const Color(0xFFB8B7B3),
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.center,
                   ),
                   SizedBox(height: ScreenConfig.height * 0.02),
                   RichText(
@@ -56,14 +66,6 @@ class _ConfirmPasswordState extends State<ConfirmPassword> {
                         ),
                       ],
                     ),
-                  ),
-                  Text(
-                    "Your Password must be atleast contain \n a special character and 8 digit long",
-                    style: TextStyle(
-                        color: const Color(0xFFB8B7B3),
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold),
-                    textAlign: TextAlign.center,
                   ),
                   Container(
                     margin: EdgeInsets.fromLTRB(30, 20, 30, 0),
@@ -107,7 +109,7 @@ class _ConfirmPasswordState extends State<ConfirmPassword> {
                         Row(
                           children: [
                             Text(
-                              "Password",
+                              "Confirm Password",
                               textAlign: TextAlign.start,
                               style: TextStyle(
                                   color: const Color(0xFFB8B7B3),
@@ -137,7 +139,7 @@ class _ConfirmPasswordState extends State<ConfirmPassword> {
                                       : Icons.visibility))),
                         ),
                         SizedBox(
-                          height: ScreenConfig.height * 0.025,
+                          height: ScreenConfig.height * 0.25,
                         ),
                         ElevatedButton(
                           onPressed: () {},

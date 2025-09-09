@@ -65,6 +65,8 @@ flutter:
     - assets/images/loginScreen.png
     - assets/images/google.png
     - assets/images/createAccount.png
+    - assets/images/forgetpass1.png
+    - assets/images/forgetpass22.png
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
