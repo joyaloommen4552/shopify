@@ -12,6 +12,10 @@ class ForgetPasswordEmail extends StatefulWidget {
 
 class _ForgetPasswordEmailState extends State<ForgetPasswordEmail> {
   bool obsure = true;
+  final TextEditingController _emailcontroller = TextEditingController();
+
+  final _formkey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,104 +31,121 @@ class _ForgetPasswordEmailState extends State<ForgetPasswordEmail> {
 
             // Foreground content
             Center(
-              child: Column(
-                // mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  SizedBox(height: ScreenConfig.height * 0.1),
-                  SizedBox(
-                    width: ScreenConfig.width * 0.8,
-                    //height: ScreenConfig.height * 0.5,
-                    child: Image.asset("assets/images/forgetpass1.png"),
-                  ),
-                  SizedBox(height: ScreenConfig.height * 0.02),
-                  RichText(
-                    text: TextSpan(
-                      text: "Forget  ",
-                      style: GoogleFonts.inter(
-                        color: Colors.green,
-                        fontSize: 25,
+              child: Form(
+                key: _formkey,
+                child: Column(
+                  // mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SizedBox(height: ScreenConfig.height * 0.1),
+                    SizedBox(
+                      width: ScreenConfig.width * 0.8,
+                      //height: ScreenConfig.height * 0.5,
+                      child: Image.asset("assets/images/forgetpass1.png"),
+                    ),
+                    SizedBox(height: ScreenConfig.height * 0.02),
+                    RichText(
+                      text: TextSpan(
+                        text: "Forget  ",
+                        style: GoogleFonts.inter(
+                          color: Colors.green,
+                          fontSize: 25,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        children: [
+                          TextSpan(
+                            text: "Password?",
+                            style: GoogleFonts.inter(
+                              color: Colors.black,
+                              fontSize: 25,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Text(
+                      "Enter your email to receive a password \n reset Link",
+                      style: TextStyle(
+                        color: const Color(0xFFB8B7B3),
+                        fontSize: 14,
                         fontWeight: FontWeight.bold,
                       ),
-                      children: [
-                        TextSpan(
-                          text: "Password?",
-                          style: GoogleFonts.inter(
-                            color: Colors.black,
-                            fontSize: 25,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
+                      textAlign: TextAlign.center,
                     ),
-                  ),
-                  Text(
-                    "Enter your email to receive a password \n reset Link",
-                    style: TextStyle(
-                      color: const Color(0xFFB8B7B3),
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                  Container(
-                    margin: EdgeInsets.fromLTRB(30, 20, 30, 0),
-                    child: Column(
-                      children: [
-                        Row(
-                          children: [
-                            Text(
-                              "Email",
-                              textAlign: TextAlign.start,
-                              style: TextStyle(
-                                  color: const Color(0xFFB8B7B3),
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ],
-                        ),
-                        TextField(
-                          decoration: InputDecoration(
-                              hintText: "Example@123.com",
-                              hintStyle: TextStyle(
-                                  color: const Color(0xFFC5C5C5),
-                                  fontSize: 14),
-                              focusedBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color: Colors.green, width: 2)),
-                              enabledBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.grey))),
-                        ),
-                        SizedBox(
-                          height: ScreenConfig.height * 0.189,
-                        ),
-                        ElevatedButton(
-                          onPressed: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (_) => const ConfirmPassword(),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(30, 20, 30, 0),
+                      child: Column(
+                        children: [
+                          Row(
+                            children: [
+                              Text(
+                                "Email",
+                                textAlign: TextAlign.start,
+                                style: TextStyle(
+                                    color: const Color(0xFFB8B7B3),
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.bold),
                               ),
-                            );
-                          },
-                          style: ElevatedButton.styleFrom(
-                              minimumSize: Size(ScreenConfig.width * 0.75,
-                                  ScreenConfig.height * 0.05625),
-                              backgroundColor: const Color(0xFF4CAF50),
-                              foregroundColor: Colors.white,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(12))),
-                          child: Text(
-                            "Reset Password",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
+                            ],
+                          ),
+                          TextFormField(
+                            controller: _emailcontroller,
+                            decoration: InputDecoration(
+                                hintText: "Example@123.com",
+                                hintStyle: TextStyle(
+                                    color: const Color(0xFFC5C5C5),
+                                    fontSize: 14),
+                                focusedBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.green, width: 2)),
+                                enabledBorder: UnderlineInputBorder(
+                                    borderSide:
+                                        BorderSide(color: Colors.grey))),
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return "Email is required";
+                              }
+                              if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w]{2,4}')
+                                  .hasMatch(value)) {
+                                return 'Enter a valid email';
+                              }
+                              return null;
+                            },
+                          ),
+                          SizedBox(
+                            height: ScreenConfig.height * 0.189,
+                          ),
+                          ElevatedButton(
+                            onPressed: () {
+                              if (_formkey.currentState!.validate()) {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (_) => const ConfirmPassword(),
+                                  ),
+                                );
+                              }
+                            },
+                            style: ElevatedButton.styleFrom(
+                                minimumSize: Size(ScreenConfig.width * 0.75,
+                                    ScreenConfig.height * 0.05625),
+                                backgroundColor: const Color(0xFF4CAF50),
+                                foregroundColor: Colors.white,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(12))),
+                            child: Text(
+                              "Reset Password",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                              ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ],
