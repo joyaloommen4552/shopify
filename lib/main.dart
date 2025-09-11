@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shopify/CustomClass/screen_config.dart';
-import 'package:shopify/Screens/login_screen.dart';
+import 'package:shopify/Screens/splash_screen.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
       return MaterialApp(
         theme: ThemeData(textTheme: GoogleFonts.interTextTheme()),
         debugShowCheckedModeBanner: false,
-        home: CustomWidget(),
+        home: SplashScreen(),
       );
     });
   }
