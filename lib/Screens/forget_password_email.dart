@@ -31,16 +31,13 @@ class _ForgetPasswordEmailState extends State<ForgetPasswordEmail> {
             Positioned.fill(
               child: Image.asset(
                 'assets/images/front.png',
-                fit: BoxFit.cover, // fills screen without stretching oddly
+                fit: BoxFit.cover,
               ),
             ),
-
-            // Foreground content
             Center(
               child: Form(
                 key: _formkey,
                 child: Column(
-                  // mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     SizedBox(height: ScreenConfig.height * 0.1),

@@ -29,7 +29,6 @@ class _CreateAccountState extends State<CreateAccount> {
     return Scaffold(
       body: SingleChildScrollView(
         child: Stack(
-          // <-- Use Stack for background + content
           children: [
             Center(
               child: Form(
