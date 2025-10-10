@@ -17,6 +17,12 @@ class _ForgetPasswordEmailState extends State<ForgetPasswordEmail> {
   final _formkey = GlobalKey<FormState>();
 
   @override
+  void dispose() {
+    _emailcontroller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(

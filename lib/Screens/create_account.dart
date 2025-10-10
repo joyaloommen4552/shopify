@@ -17,6 +17,14 @@ class _CreateAccountState extends State<CreateAccount> {
 
   final _formkey = GlobalKey<FormState>();
   @override
+  void dispose() {
+    _namecontroller.dispose();
+    _emailcontroller.dispose();
+    _passwordcontroller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
@@ -223,10 +231,8 @@ class _CreateAccountState extends State<CreateAccount> {
                                     const Color.fromARGB(194, 255, 255, 255),
                                 foregroundColor: Colors.grey,
                                 minimumSize: Size(
-                                  ScreenConfig.width *
-                                      0.8, // 80% of screen width
-                                  ScreenConfig.height *
-                                      0.06, // 6% of screen height
+                                  ScreenConfig.width * 0.8,
+                                  ScreenConfig.height * 0.06,
                                 ),
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(12))),
