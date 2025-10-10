@@ -20,6 +20,13 @@ class _ConfirmPasswordState extends State<ConfirmPassword> {
   final _formkey = GlobalKey<FormState>();
 
   @override
+  void dispose() {
+    _passwordcontroller.dispose();
+    _confirmpasswordcontroller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
