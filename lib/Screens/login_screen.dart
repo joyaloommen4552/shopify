@@ -30,17 +30,13 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       body: SingleChildScrollView(
         child: Stack(
-          // <-- Use Stack for background + content
           children: [
-            // Background image
             Positioned.fill(
               child: Image.asset(
                 'assets/images/front.png',
-                fit: BoxFit.cover, // fills screen without stretching oddly
+                fit: BoxFit.cover,
               ),
             ),
-
-            // Foreground content
             Center(
               child: Form(
                 key: _formkey,
