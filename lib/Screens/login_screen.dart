@@ -112,7 +112,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               if (value == null || value.isEmpty) {
                                 return "Email is required";
                               }
-                              if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w]{2,4}')
+                              if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w]{2,4}$')
                                   .hasMatch(value)) {
                                 return 'Enter a valid email';
                               }
@@ -168,20 +168,21 @@ class _LoginScreenState extends State<LoginScreen> {
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                               TextButton(
-                                  onPressed: () {
-                                    Navigator.of(context).push(
-                                      MaterialPageRoute(
-                                        builder: (_) =>
-                                            const ForgetPasswordEmail(),
-                                      ),
-                                    );
-                                  },
-                                  child: Text(
-                                    "Forget Password?",
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.w600),
-                                  )),
+                                onPressed: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (_) =>
+                                          const ForgetPasswordEmail(),
+                                    ),
+                                  );
+                                },
+                                child: Text(
+                                  "Forget Password?",
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                              ),
                             ],
                           ),
                           ElevatedButton(
@@ -229,10 +230,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                     const Color.fromARGB(194, 255, 255, 255),
                                 foregroundColor: Colors.grey,
                                 minimumSize: Size(
-                                  ScreenConfig.width *
-                                      0.8, // 80% of screen width
-                                  ScreenConfig.height *
-                                      0.06, // 6% of screen height
+                                  ScreenConfig.width * 0.8,
+                                  ScreenConfig.height * 0.06,
                                 ),
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(12))),

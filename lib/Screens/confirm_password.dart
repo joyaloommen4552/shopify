@@ -54,7 +54,7 @@ class _ConfirmPasswordState extends State<ConfirmPassword> {
                       child: Image.asset("assets/images/forgetpass22.png"),
                     ),
                     Text(
-                      "Your Password must be atleast contain \n a special character and 8 digit long",
+                      "Your password must contain at least one special character and be at least 8 characters long",
                       style: TextStyle(
                           color: const Color(0xFFB8B7B3),
                           fontSize: 14,
@@ -122,8 +122,8 @@ class _ConfirmPasswordState extends State<ConfirmPassword> {
                               if (value == null || value.isEmpty) {
                                 return "Password is required";
                               }
-                              if (value.length < 6) {
-                                return 'Password must be at least 6 characters';
+                              if (value.length < 8) {
+                                return 'Password must be at least 8 characters';
                               }
                               return null;
                             },
@@ -145,7 +145,7 @@ class _ConfirmPasswordState extends State<ConfirmPassword> {
                           ),
                           TextFormField(
                             controller: _confirmpasswordcontroller,
-                            obscureText: obsure,
+                            obscureText: obsure2,
                             decoration: InputDecoration(
                                 focusedBorder: UnderlineInputBorder(
                                     borderSide: BorderSide(
@@ -167,8 +167,8 @@ class _ConfirmPasswordState extends State<ConfirmPassword> {
                               if (value == null || value.isEmpty) {
                                 return "Password is required";
                               }
-                              if (value.length < 6) {
-                                return 'Password must be at least 6 characters';
+                              if (value.length < 8) {
+                                return 'Password must be at least 8 characters';
                               }
                               if (value != _passwordcontroller.text) {
                                 return 'Password do not match';

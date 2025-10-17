@@ -133,7 +133,7 @@ class _CreateAccountState extends State<CreateAccount> {
                               if (value == null || value.isEmpty) {
                                 return "Email is required";
                               }
-                              if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w]{2,4}')
+                              if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w]{2,4}$')
                                   .hasMatch(value)) {
                                 return 'Enter a valid email';
                               }
