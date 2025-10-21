@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:shopify/CustomClass/screen_config.dart';
+import 'package:shopify/Provider/login_provider.dart';
 import 'package:shopify/Screens/create_account.dart';
 import 'package:shopify/Screens/forget_password_email.dart';
 
@@ -158,8 +160,8 @@ class _LoginScreenState extends State<LoginScreen> {
                               if (value == null || value.isEmpty) {
                                 return "Password is required";
                               }
-                              if (value.length < 6) {
-                                return 'Password must be at least 6 characters';
+                              if (value.length < 4) {
+                                return 'Password must be at least 4 characters';
                               }
                               return null;
                             },
@@ -185,29 +187,38 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                             ],
                           ),
-                          ElevatedButton(
-                            onPressed: () {
-                              if (_formkey.currentState!.validate()) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                        content: Text("Login Successfull")));
-                              }
-                            },
-                            style: ElevatedButton.styleFrom(
-                                minimumSize: Size(ScreenConfig.width * 0.75,
-                                    ScreenConfig.height * 0.05625),
-                                backgroundColor: const Color(0xFF4CAF50),
-                                foregroundColor: Colors.white,
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(12))),
-                            child: Text(
-                              "Sign In",
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18,
-                              ),
-                            ),
-                          ),
+                          Consumer<LoginProvider>(
+                              builder: (context, provider, child) {
+                            return ElevatedButton(
+                              onPressed: provider.isLoading
+                                  ? null
+                                  : () {
+                                      if (_formkey.currentState!.validate()) {
+                                        provider.login(_emailcontroller.text,
+                                            _passwordcontroller.text, context);
+                                      }
+                                    },
+                              style: ElevatedButton.styleFrom(
+                                  minimumSize: Size(ScreenConfig.width * 0.75,
+                                      ScreenConfig.height * 0.05625),
+                                  backgroundColor: const Color(0xFF4CAF50),
+                                  foregroundColor: Colors.white,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.circular(12))),
+                              child: provider.isLoading
+                                  ? const CircularProgressIndicator(
+                                      color: Colors.white,
+                                    )
+                                  : Text(
+                                      "Sign In",
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18,
+                                      ),
+                                    ),
+                            );
+                          }),
                           SizedBox(
                             height: ScreenConfig.height * 0.025,
                           ),

@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:shopify/CustomClass/screen_config.dart';
+import 'package:shopify/Provider/login_provider.dart';
 import 'package:shopify/Screens/splash_screen.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
-  runApp(MyApp());
+  runApp(
+      ChangeNotifierProvider(create: (_) => LoginProvider(), child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {

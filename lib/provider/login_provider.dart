@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shopify/utils/api_constants.dart';
@@ -13,21 +12,52 @@ class LoginProvider extends ChangeNotifier {
     notifyListeners();
 
     try {
-      final response =
-          await http.post(Uri.parse(ApiConstants.loginurl), body: {
+      // 👇 full header including keep-alive
+      final headers = {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "Connection": "keep-alive", // 👈 this keeps the TCP connection open
+      };
+
+      final body = jsonEncode({
         "email": email,
         "password": password,
       });
+
+      final response = await http.post(
+        Uri.parse(ApiConstants.loginurl),
+        headers: headers,
+        body: body,
+      );
+
       final data = jsonDecode(response.body);
-      print(data);
+
+      if (!context.mounted) return;
+
       if (data["status"] == "success") {
-        ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text("Login Successful")));
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("✅ Login Successful")),
+        );
+
+        // Navigator.pushReplacement(
+        //   context,
+        //   MaterialPageRoute(
+        //     builder: (_) => HomeScreen(name: data["user"]["name"]),
+        //   ),
+        // );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text("⚠️ ${data['message']}")),
+        );
       }
     } catch (e) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text("error :$e")));
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text("❌ Error: $e")),
+        );
+      }
     }
+
     isLoading = false;
     notifyListeners();
   }
