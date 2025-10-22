@@ -12,11 +12,10 @@ class LoginProvider extends ChangeNotifier {
     notifyListeners();
 
     try {
-      // 👇 full header including keep-alive
       final headers = {
         "Content-Type": "application/json",
         "Accept": "application/json",
-        "Connection": "keep-alive", // 👈 this keeps the TCP connection open
+        "Connection": "keep-alive",
       };
 
       final body = jsonEncode({
