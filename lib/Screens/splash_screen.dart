@@ -2,7 +2,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shopify/CustomClass/screen_config.dart';
+import 'package:shopify/Screens/home_page.dart';
 import 'package:shopify/Screens/login_screen.dart';
+import 'package:shopify/SharedPrefer/full_shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -20,20 +22,34 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    _timer = Timer.periodic(Duration(seconds: 3), (timer) {
+    _startAutoSlide();
+  }
+
+  Timer _startAutoSlide() {
+    return _timer = Timer.periodic(Duration(seconds: 3), (timer) {
       if (_currentpage == 0 || _currentpage == 1) {
         _controller.nextPage(
             duration: Duration(milliseconds: 400), curve: Curves.easeInOut);
       } else {
         timer.cancel();
-        Future.delayed(Duration(seconds: 4), () {
-          if (mounted) {
-            Navigator.pushReplacement(context,
-                MaterialPageRoute(builder: (context) => LoginScreen()));
-          }
-        });
+        _navigateNext();
       }
     });
+  }
+
+  Future<void> _navigateNext() async {
+    bool loggedIn = await FullSharedPreferences.isLogedIn();
+    await Future.delayed(const Duration(seconds: 2));
+
+    if (!mounted) return;
+
+    if (loggedIn) {
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (_) => const HomePage()));
+    } else {
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (_) => const LoginScreen()));
+    }
   }
 
   @override

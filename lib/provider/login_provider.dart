@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:shopify/Screens/home_page.dart';
+import 'package:shopify/SharedPrefer/full_shared_preferences.dart';
 import 'package:shopify/utils/api_constants.dart';
 
 class LoginProvider extends ChangeNotifier {
@@ -38,12 +40,14 @@ class LoginProvider extends ChangeNotifier {
           const SnackBar(content: Text("✅ Login Successful")),
         );
 
-        // Navigator.pushReplacement(
-        //   context,
-        //   MaterialPageRoute(
-        //     builder: (_) => HomeScreen(name: data["user"]["name"]),
-        //   ),
-        // );
+        await FullSharedPreferences.saveUserData(
+            name: data["user"]["name"],
+            email: data["user"]["email"],
+            token: data["token"]);
+        if (!context.mounted) return;
+
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (_) => HomePage()));
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text("⚠️ ${data['message']}")),
